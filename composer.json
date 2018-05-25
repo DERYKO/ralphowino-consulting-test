@@ -1,0 +1,5 @@
+{
+    "require": {
+        "hootlex/laravel-friendships": "^1.0"
+    }
+}

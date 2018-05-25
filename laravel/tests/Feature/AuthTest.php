@@ -90,6 +90,7 @@ class AuthTest extends TestCase
        //Generate password reset token for the created user
        $token = Password::createToken($user);
        $newPassword = 'password';
+       
        $this->post('/password/reset', [
            'token' => $token,
            'email' => $user->email,
