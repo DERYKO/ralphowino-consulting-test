@@ -45,7 +45,26 @@
 
                                 </div>
                                 <div class="col-lg-9">
+                                    @if(count($user)>0)
+                                        @foreach($user as $user1)
+                                            @if(Auth::id()==$user1->id)
+                                                @else
+                                            <div >
+                                                <img  src="{{\Illuminate\Support\Facades\Storage::url($user1->avatar)}}" width="20%" height="auto" ><br><p class="fa fa-address-book"> {{$user1->name}}</p><br>
+                                                <p class="fa fa-heart"> {{$user1->profile->status}}</p><br>
+                                                <p class="fa fa-location-arrow"> {{$user1->profile->location}}</p>
+                                                <p>{{$user1->slug}}</p>
+                                                <hr>
+                                            </div>
+                                            @endif
+                                        @endforeach
+                                        @endif
+                                    <div class="panel panel-default">
+                                        <div class="body">
+                                            <friend></friend>
+                                        </div>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>

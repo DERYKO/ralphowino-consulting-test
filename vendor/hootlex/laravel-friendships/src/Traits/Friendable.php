@@ -1,24 +1,25 @@
 <?php
 
 namespace Hootlex\Friendships\Traits;
-
 use Hootlex\Friendships\Models\Friendship;
 use Hootlex\Friendships\Models\FriendFriendshipGroups;
 use Hootlex\Friendships\Status;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Event;
 
+
 /**
  * Class Friendable
  * @package Hootlex\Friendships\Traits
  */
-trait Friendable
+ trait Friendable
 {
     /**
      * @param Model $recipient
      *
      * @return \Hootlex\Friendships\Models\Friendship|false
      */
+
     public function befriend(Model $recipient)
     {
 

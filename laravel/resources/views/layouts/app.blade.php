@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Social Network') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
@@ -31,7 +31,11 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/home') }}">
+                        <friend></friend>
                         Social Network
+                    </a>
+                    <a class="navbar-brand" href="{{ url('/home') }}">
+                        <i class="fa fa-home">Home</i>
                     </a>
                     @if(Auth::check())
                     <a class="navbar-brand" href="{{url('/friends')}}">

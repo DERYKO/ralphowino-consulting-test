@@ -17,5 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/friends','friendscontroller@index');
+Route::group(['middleware'=>'auth'],function (){
+    Route::get('/editProfile','profileController@editProfile');
+
+    Route::post('/editProfile/edit','profileController@updateprofile');
+
+    Route::get('/friends','friendscontroller@index');
+
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/add', 'friendscontroller@befriend');
+    Route::get('/findFriends', 'friendscontroller@findfriends');
+
+});

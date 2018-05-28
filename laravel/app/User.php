@@ -1,12 +1,14 @@
 <?php
 
 namespace App;
-
+use Hootlex\Friendships\Traits\Friendable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
+
 {
+    use Friendable;
     use Notifiable;
 
     /**
@@ -27,6 +29,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     public function profile(){
-        return $this->hasOne('App/Profile');
+        return $this->hasOne('App\Profile');
     }
 }
