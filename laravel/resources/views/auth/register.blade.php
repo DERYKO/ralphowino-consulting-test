@@ -24,14 +24,15 @@
                                 @endif
                             </div>
                         </div>
+
                         <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                             <label for="gender" class="col-md-4 control-label">Gender</label>
 
                             <div class="col-md-6">
-                               <select name="gender" class="form-control">
-                                   <option value="1">Male</option>
-                                   <option value="0">Female</option>
-                               </select>
+                                  <select name="gender" id="gender" class="form-control">
+                                      <option value="1">Male</option>
+                                      <option value="0">Female</option>
+                                  </select>
                                 @if ($errors->has('gender'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('gender') }}</strong>
@@ -39,7 +40,19 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group{{ $errors->has('DOB') ? ' has-error' : '' }}">
+                            <label for="DOB" class="col-md-4 control-label">Date of Birth</label>
 
+                            <div class="col-md-6">
+                                <input id="DOB" type="date" class="form-control" name="DOB"  required autofocus>
+
+                                @if ($errors->has('DOB'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('DOB') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>

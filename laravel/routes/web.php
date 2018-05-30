@@ -15,18 +15,27 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+
 Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware'=>'auth'],function (){
-    Route::get('/editProfile','profileController@editProfile');
-
-    Route::post('/editProfile/edit','profileController@updateprofile');
-
+    Route::get('/myprofile/{slug}', 'ProfilesController@index');
+    Route::get('/myprofiles/editprofile','ProfilesController@editprofile');
+    Route::get(' /editmyprofile/update','ProfilesController@updateprofile');
+    Route::get('/check_status/{id}', 'friendablecontroller@check_status');
+    Route::get('/addFriend/{id}', 'friendablecontroller@addFriend');
+    Route::get('/acceptFriend/{id}', 'friendablecontroller@acceptFriend');
+    Route::get('/removeFriend/{id}', 'friendablecontroller@removeFriend');
+    Route::get('/blockFriend/{id}', 'friendablecontroller@blockFriend');
+    Route::get('/unblockFriend/{id}', 'friendablecontroller@unblockFriend');
+    Route::get('/denyFriend/{id}', 'friendablecontroller@denyFriend');
     Route::get('/friends','friendscontroller@index');
+    Route::get('/messaging','messagingcontroller@index');
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/blockedrequests','friendscontroller@blocked');
+    Route::get('/findFriends','friendscontroller@findfriends');
+    Route::get('/friendrequests','friendscontroller@friendrequests');
 
-    Route::get('/add', 'friendscontroller@befriend');
-    Route::get('/findFriends', 'friendscontroller@findfriends');
 
 });

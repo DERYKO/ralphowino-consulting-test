@@ -63,8 +63,7 @@
                                             @endforeach
                                         @else
                                             <div class="panel-body">
-                                                <h4>You have no friends. find friends and send them a request!</h4>
-                                                <a  href="{{url('/findFriends')}}" class="btn btn-success">Find friends</a>
+                                                <h4>No Blocked Friends!!</h4>
                                             </div>
                                         @endif
                                     </div>

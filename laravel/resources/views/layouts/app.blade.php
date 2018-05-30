@@ -8,12 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Social Network') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -28,26 +27,26 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}">
-                        <friend></friend>
-                        Social Network
-                    </a>
-                    <a class="navbar-brand" href="{{ url('/home') }}">
-                        <i class="fa fa-home">Home</i>
-                    </a>
-                    @if(Auth::check())
-                    <a class="navbar-brand" href="{{url('/friends')}}">
-                        <i class="fa fa-users">Friends</i>
-                    </a>
-                    @endif
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        @if(Auth::check())
+                            <a class="navbar-brand" href="{{ url('\myprofile',['slug'=>Auth::user()->slug]) }}">
+                                <b><i class="fa fa-photo"> MyProfile</i></b>
+                            </a>
+                        @endif
+                        @if(Auth::check())
+                            <a class="navbar-brand" href="{{ url('\friends') }}">
+                                <b><i class="fa fa-users"> Friends</i></b>
+                            </a>
+                        @endif
+                        @if(Auth::check())
+                            <a class="navbar-brand" href="{{ url('\messaging') }}">
+                                <b><i class="fa fa-inbox"> Inbox</i></b>
+                            </a>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -57,16 +56,16 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li class="dropdown" role="menu">
+                            <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu" >
+                                <ul class="dropdown-menu pull-right" role="menu">
                                     <li>
-                                        <a href="{{ route('logout') }}" role="menu"
+                                        <a class="fa fa-sign-out" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit()">
                                             Logout
                                         </a>
 
@@ -74,6 +73,7 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    <li><a class="fa fa-gear"> Settings</a></li>
                                 </ul>
                             </li>
                         @endif

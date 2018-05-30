@@ -46,28 +46,29 @@
 
                                 </div>
                                 <div class="col-lg-8">
-                                    <div class="panel-body">
-                                        @if(count($user)>0)
-                                            @foreach($user as $friend)
-                                                @if(Auth::id()!==$friend->id)
-                                                    <div style="overflow: auto">
-                                                        <div class="body" style="border: 1px solid whitesmoke">
-                                                            <p class="text-center" style="text-transform: capitalize">{{$friend->slug}}'s Profile</p>
-                                                            <p class="text-center"><img src="{{\Illuminate\Support\Facades\Storage::url('uploads\social.jpg')}}" alt="No Profile" height="100px" width="100px" style="border-radius: 50%;"></p>
-                                                            <p class="text-center">{{$friend->name}}</p>
-                                                            <p class="text-center">{{$friend->profile->about}}</p>
-                                                            <example :profile_user_id="{{$friend->id}}" ></example>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        @else
-                                            <div class="panel-body">
-                                                <h4>You have no friends. find friends and send them a request!</h4>
-                                                <a  href="{{url('/findFriends')}}" class="btn btn-success">Find friends</a>
+                                    @if(count($user)>0)
+                                        @foreach($user as $friend)
+                                            <div>
+                                                <div class="body" style="border: 1px solid whitesmoke">
+                                                    <p class="text-center" style="text-transform: capitalize">{{$friend->slug}}'s Profile</p>
+                                                    <p class="text-center"><img src="{{\Illuminate\Support\Facades\Storage::url('uploads\social.jpg')}}" alt="No Profile" height="100px" width="100px" style="border-radius: 50%;"></p>
+                                                    <p class="text-center">{{$friend->name}}</p>
+                                                    <p class="text-center">{{$friend->profile->about}}</p>
+                                                    @if(Auth::id()!==$friend->id)
+                                                        <example :profile_user_id="{{$friend->id}}" ></example>
+                                                    @endif
+                                                </div>
                                             </div>
-                                        @endif
-                                    </div>
+
+                                        @endforeach
+                                    @else
+                                        <div class="container">
+                                            <h4>No new Friend Requests</h4>
+
+                                        </div>
+
+                                    @endif
+
                                 </div>
                             </div>
                         </div>

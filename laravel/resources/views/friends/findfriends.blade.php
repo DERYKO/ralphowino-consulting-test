@@ -27,7 +27,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Dashboard</div>
 
@@ -38,32 +38,34 @@
                                 <div class="col-lg-3">
                                     <div class="vertical-menu">
 
-                                        <a href="#" class="active"><span class="fa fa-user"> My Friends</span></a>
+                                        <a href="{{url('/friends')}}" class="active"><span class="fa fa-user"> My Friends</span></a>
                                         <a href="{{url('/findFriends')}}"><span class="fa fa-user-plus"> Find Friends</span></a>
-                                        <a href="#"><span class="fa fa-bell">  Friend Requests</span></a>
+                                        <a href="{{url('/friendrequests')}}"><span class="fa fa-bell">  Friend Requests</span></a>
+                                        <a href="{{url('/blockedrequests')}}"><span class="fa fa-ban"> Blocked</span></a>
                                     </div>
 
                                 </div>
-                                <div class="col-lg-9">
-                                    @if(count($user)>0)
-                                        @foreach($user as $user1)
-                                            @if(Auth::id()==$user1->id)
-                                                @else
-                                            <div >
-                                                <img  src="{{\Illuminate\Support\Facades\Storage::url($user1->avatar)}}" width="20%" height="auto" ><br><p class="fa fa-address-book"> {{$user1->name}}</p><br>
-                                                <p class="fa fa-heart"> {{$user1->profile->status}}</p><br>
-                                                <p class="fa fa-location-arrow"> {{$user1->profile->location}}</p>
-                                                <p>{{$user1->slug}}</p>
-                                                <hr>
+                                <div class="col-lg-8">
+                                    <div class="panel-body">
+                                        @if(count($user)>0)
+                                            @foreach($user as $friend)
+                                                @if(Auth::id()!==$friend->id)
+                                                    <div style="overflow: auto">
+                                                        <div class="body" style="border: 1px solid whitesmoke">
+                                                            <p class="text-center" style="text-transform: capitalize">{{$friend->slug}}'s Profile</p>
+                                                            <p class="text-center"><img src="{{\Illuminate\Support\Facades\Storage::url('uploads\social.jpg')}}" alt="No Profile" height="100px" width="100px" style="border-radius: 50%;"></p>
+                                                            <p class="text-center">{{$friend->name}}</p>
+                                                            <p class="text-center">{{$friend->profile->about}}</p>
+                                                            <example :profile_user_id="{{$friend->id}}" ></example>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <div class="panel-body">
+                                                <h2>No more friends to add</h2>
                                             </div>
-                                            @endif
-                                        @endforeach
                                         @endif
-                                    <div class="panel panel-default">
-                                        <div class="body">
-                                            <friend></friend>
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>

@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Nairobi Social Platform</title>
+        <title>Nairobi Social Network</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -55,7 +55,7 @@
                 font-size: 12px;
                 font-weight: 600;
                 letter-spacing: .1rem;
-                text-decorationb: none;
+                text-decoration: none;
                 text-transform: uppercase;
             }
 
@@ -76,14 +76,6 @@
                     @endif
                 </div>
             @endif
-
-            <div class="content">
-                <table class="table table-bordered">
-
-                </table>
-            </div>
         </div>
     </body>
-    <div id="app"></div>
-<script src="{{asset('js/app.js')}}"></script>
 </html>
