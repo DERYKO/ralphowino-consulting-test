@@ -1,21 +1,31 @@
 @extends('layouts.app')
+<style >
+    .vertical-menu {
+        width: 200px;
+        height: 150px;
+        overflow-y: auto;
+    }
 
+    .vertical-menu a {
+        background-color: #eee; /* Grey background color */
+        color: black; /* Black text color */
+        display: block; /* Make the links appear below each other */
+        padding: 12px; /* Add some padding */
+        text-decoration: none; /* Remove underline from links */
+    }
+
+    .vertical-menu a:hover {
+        background-color: #ccc; /* Dark grey background on mouse-over */
+    }
+
+    .vertical-menu a.active {
+        background-color: #4CAF50; /* Add a green color to the "active/current" link */
+        color: white;
+    }
+
+</style>
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Messages</div>
-
-                    <div class="panel-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
+    <chats :profile_user_id="{{Auth::user()->id}}"></chats>
     </div>
 @endsection

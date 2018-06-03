@@ -9,7 +9,7 @@
                         <h4 style="text-transform: capitalize;">{{$user->slug}}'s profile</h4>
                         <hr>
                         <div class="panel-body">
-                            <img src="{{\Illuminate\Support\Facades\Storage::url('uploads\social.jpg')}}" alt="No Profile" height="100px" width="100px" style="border-radius: 50%;">
+                            <img src="{{\Illuminate\Support\Facades\Storage::url('upload/male.png')}}" alt="No Profile" height="100px" width="100px" style="border-radius: 50%;">
                             <p class="text-center">{{$user->name}}</p>
                             <p class="text-center">{{$user->profile->about}}</p>
                             @if(Auth::id()==$user->id)

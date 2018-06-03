@@ -36,6 +36,13 @@ Route::group(['middleware'=>'auth'],function (){
     Route::get('/blockedrequests','friendscontroller@blocked');
     Route::get('/findFriends','friendscontroller@findfriends');
     Route::get('/friendrequests','friendscontroller@friendrequests');
-
+    Route::get('/getFriends','messagingcontroller@friendsMessages');
+    Route::get('/fetchthreads/{id}','messagingcontroller@show');
+    Route::get('/fetchUnread/{id}','messagingcontroller@fetchUnread');
+    Route::get('/thread/fetchMessages/{id}','messagingcontroller@fetch_messages');
+    Route::get('/participant/remove/{id}','messagingcontroller@removeParticipant');
+    Route::get('/messages/thread/participants/{id}','messagingcontroller@get_all_participants');
+    Route::post('/messages/create','messagingcontroller@create_thread');
+    Route::post('/messages/save','messagingcontroller@save_message');
 
 });

@@ -51,7 +51,7 @@
                                             <div>
                                                 <div class="body" style="border: 1px solid whitesmoke">
                                                     <p class="text-center" style="text-transform: capitalize">{{$friend->slug}}'s Profile</p>
-                                                    <p class="text-center"><img src="{{\Illuminate\Support\Facades\Storage::url('uploads\social.jpg')}}" alt="No Profile" height="100px" width="100px" style="border-radius: 50%;"></p>
+                                                    <p class="text-center"><img src="{{\Illuminate\Support\Facades\Storage::url('upload/male.png')}}" alt="No Profile" height="100px" width="100px" style="border-radius: 50%;"></p>
                                                     <p class="text-center">{{$friend->name}}</p>
                                                     <p class="text-center">{{$friend->profile->about}}</p>
                                                     @if(Auth::id()!==$friend->id)

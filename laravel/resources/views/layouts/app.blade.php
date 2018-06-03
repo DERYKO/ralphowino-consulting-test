@@ -32,21 +32,10 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        @if(Auth::check())
-                            <a class="navbar-brand" href="{{ url('\myprofile',['slug'=>Auth::user()->slug]) }}">
-                                <b><i class="fa fa-photo"> MyProfile</i></b>
+
+                            <a class="navbar-brand" href="{{ url('\home')}}">
+                                <b><i class="fa fa-home"> Home</i></b>
                             </a>
-                        @endif
-                        @if(Auth::check())
-                            <a class="navbar-brand" href="{{ url('\friends') }}">
-                                <b><i class="fa fa-users"> Friends</i></b>
-                            </a>
-                        @endif
-                        @if(Auth::check())
-                            <a class="navbar-brand" href="{{ url('\messaging') }}">
-                                <b><i class="fa fa-inbox"> Inbox</i></b>
-                            </a>
-                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -56,6 +45,24 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                            <ul class="nav navbar-nav">
+
+                                @if(Auth::check())
+                                    <a class="navbar-brand" href="{{ url('\friends') }}">
+                                        <b><i class="fa fa-users"> Friends</i></b>
+                                    </a>
+                                @endif
+                                    @if(Auth::check())
+                                        <a class="navbar-brand" href="{{ url('\friends') }}">
+                                            <b><i class="fa fa-bell"> Notifications</i></b>
+                                        </a>
+                                    @endif
+                                @if(Auth::check())
+                                    <a class="navbar-brand" href="{{ url('\messaging') }}">
+                                        <b><i class="fa fa-comment"> <unread :user_id="{{Auth::user()->id}}"></unread>Inbox</i></b>
+                                    </a>
+                                @endif
+                            </ul>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
