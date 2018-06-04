@@ -22,6 +22,11 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-8">
+                <div class="panel panel-default">
+                    <post :profile_user_id="{{Auth::user()->id}}"></post>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

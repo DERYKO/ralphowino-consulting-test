@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use GetStream\Stream\Client;
+use Illuminate\Http\Request;
+use App\Post;
+use Illuminate\Support\Facades\Config;
+
 use App\Profile;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -81,6 +86,8 @@ class RegisterController extends Controller
 
         ]);
         Profile::create(['user_id'=>$user->id]);
+        $client = new Client(Config::get('stream.key'), Config::get('stream.secret'));
+        $client->feed('user', $user->id);
         return $user;
     }
 }

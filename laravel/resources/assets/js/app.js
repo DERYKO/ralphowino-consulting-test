@@ -20,6 +20,7 @@ Vue.use(Router)
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
+Vue.component('post',require('./components/postcomponent.vue'));
 Vue.component('unread', require('./components/unread.vue'));
 Vue.component('chats', require('./components/showfriends.vue'));
 Vue.component('example', require('./components/Friend.vue'));
