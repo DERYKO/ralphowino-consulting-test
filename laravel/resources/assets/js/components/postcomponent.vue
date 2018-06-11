@@ -59,7 +59,7 @@
                 }
                 this.$http.post('post/save', postData).then(
                     (response) => {
-                           
+
                     }
                 )
             },
