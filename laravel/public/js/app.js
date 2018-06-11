@@ -47452,14 +47452,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-        var _this = this;
-
-        this.$http.get('post/get').then(function (respose) {
-            _this.feed = respose.body.data;
-        });
+        console.log(123);
+    },
+    created: function created() {
+        this.fetchFeed();
     },
 
     props: ['profile_user_id'],
@@ -47469,26 +47473,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             addpost: true,
             body: '',
             posts: [],
-            feed: []
+            feed: [],
+            noActivity: false
         };
     },
 
     methods: {
         savePost: function savePost() {
-            var _this2 = this;
-
             this.addpost = false;
             this.addpost = false;
             var postData = {
                 body: this.body
             };
-            this.$http.post('post/save', postData).then(function (response) {
-                console.log(response.body);
-                _this2.post = response.body;
-            });
+            this.$http.post('post/save', postData).then(function (response) {});
         },
         deletePost: function deletePost($id) {
             this.$http.get('post/delete/' + $id).then(function (resonse) {});
+        },
+        fetchFeed: function fetchFeed() {
+            var _this = this;
+
+            console.log('ok');
+            this.$http.get('/post/get').then(function (feed) {
+                console.log(feed.body.posts);
+                if (feed.body.posts.length === 0) {
+                    _this.noActivity = true;
+                }
+                feed.body.posts.forEach(function (post) {
+                    _this.feed.push(post);
+                });
+            });
         }
     }
 });
@@ -47545,40 +47559,52 @@ var render = function() {
         : _vm._e()
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "container" },
-      _vm._l(_vm.feed, function(singleFeed) {
-        return _c("div", { staticClass: "panel-body" }, [
-          _c("div", { staticClass: "col-lg-1" }, [
-            _c("p", { staticClass: "text-justify" }, [
-              _vm._v(_vm._s(singleFeed.body))
+    _vm.noActivity
+      ? _c("div", [_c("h4", [_vm._v("No Activities Create a Post")])])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel panel-default" }, [
+      _c(
+        "div",
+        { staticClass: "panel-body" },
+        _vm._l(_vm.feed, function(singleFeed) {
+          return _c("div", { staticClass: "panel-body" }, [
+            _c("h5", [
+              _c("p", { staticClass: "text-center" }, [
+                _vm._v(_vm._s(singleFeed.activity.actor))
+              ])
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "pull-left" }, [
-              _vm._v("{singleFeed.created_at}}")
-            ])
-          ]),
-          _vm._v(" "),
-          _vm.profile_user_id == singleFeed.user_id
-            ? _c("div", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger",
-                    on: {
-                      click: function($event) {
-                        _vm.deletePost(singleFeed.id)
+            _vm._m(1, true),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-center" }, [
+              _vm._v(_vm._s(singleFeed.activity.tweet))
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-center" }, [
+              _vm._v(_vm._s(singleFeed.activity.time))
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-center" }, [
+              singleFeed.activity.object == _vm.profile_user_id
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          _vm.deletePost(singleFeed.post.id)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Delete post")]
-                )
-              ])
-            : _vm._e()
-        ])
-      })
-    )
+                    },
+                    [_vm._v(" Delete")]
+                  )
+                : _vm._e()
+            ])
+          ])
+        })
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -47592,6 +47618,22 @@ var staticRenderFns = [
         { staticClass: "btn btn-success", attrs: { type: "submit" } },
         [_vm._v("Post a Story")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-center" }, [
+      _c("img", {
+        staticStyle: { "border-radius": "50%" },
+        attrs: {
+          src: "/storage/avatar/female.png",
+          alt: "No Profile",
+          height: "50px",
+          width: "50px"
+        }
+      })
     ])
   }
 ]

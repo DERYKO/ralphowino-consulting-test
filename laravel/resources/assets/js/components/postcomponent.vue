@@ -14,30 +14,28 @@
 
             <h4>No Activities Create a Post</h4>
         </div>
-        <div class="container">
-            <div  v-for="singleFeed  in feed" class="panel-body">
-                <div class="col-lg-1">
-                  <p class="text-justify">{{singleFeed.body}}</p>
-                   <p class="pull-left">{singleFeed.created_at}}</p>
-                </div>
-                <div v-if="profile_user_id==singleFeed.user_id" >
-                 <button @click="deletePost(singleFeed.id)" class="btn btn-danger">Delete post</button>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div  v-for="singleFeed  in feed" class="panel-body">
+                    <h5> <p class="text-center">{{singleFeed.activity.actor}}</p></h5>
+                    <p class="text-center"><img src="/storage/avatar/female.png" alt="No Profile" height="50px" width="50px" style="border-radius: 50%;"/></p>
+                    <p class="text-center">{{singleFeed.activity.tweet}}</p>
+                    <p class="text-center">{{singleFeed.activity.time}}</p>
+                    <p class="text-center"><button v-if="singleFeed.activity.object==profile_user_id" class="btn btn-primary" @click="deletePost(singleFeed.post.id)"> Delete</button></p>
                 </div>
             </div>
+
         </div>
     </div>
 </template>
 <script>
     export default {
         mounted(){
-            this.$http.get('post/get').then((response)=>{
-                if(response.posts.length==0) {
-                    this.noActivity=true;
-                }
-                response.posts.forEach((post) => {
-                    this.feed.push(post);
-                });
-            })
+            console.log(123);
+
+        },
+        created(){
+            this.fetchFeed();
         },
         props: ['profile_user_id']
         ,
@@ -69,6 +67,19 @@
 
                     }
                 )
+            },
+            fetchFeed: function () {
+                console.log('ok');
+                this.$http.get('/post/get').then((feed)=>{
+                    console.log(feed.body.posts);
+                    if(feed.body.posts.length === 0) {
+                        this.noActivity =true;
+                    }
+                    feed.body.posts.forEach((post) => {
+                        this.feed.push(post);
+                    });
+
+                })
             }
         }
     }
