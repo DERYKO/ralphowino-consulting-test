@@ -32,7 +32,7 @@ Route::group(['middleware'=>'auth'],function () {
     Route::get('/denyFriend/{id}', 'friendablecontroller@denyFriend');
     Route::get('/friends', 'friendscontroller@index');
     Route::get('/messaging', 'messagingcontroller@index');
-
+    Route::post('/load_data','HomeController@loop_file');
     Route::get('/blockedrequests', 'friendscontroller@blocked');
     Route::get('/findFriends', 'friendscontroller@findfriends');
     Route::get('/friendrequests', 'friendscontroller@friendrequests');

@@ -26,6 +26,7 @@
 </style>
 @section('content')
     <div class="container">
+
     <chats :profile_user_id="{{Auth::user()->id}}"></chats>
     </div>
 @endsection

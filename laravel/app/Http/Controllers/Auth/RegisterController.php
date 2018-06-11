@@ -86,7 +86,7 @@ class RegisterController extends Controller
 
         ]);
         Profile::create(['user_id'=>$user->id]);
-        $client = new Client(Config::get('stream.key'), Config::get('stream.secret'));
+        $client = new Client('uzbecczm6uh8', 'a2p8a3safphgnef5waxybc9q9s2cnkqvq4ndp7kna7uzdhnygrtpttad6srq6wed');
         $client->feed('user', $user->id);
         return $user;
     }

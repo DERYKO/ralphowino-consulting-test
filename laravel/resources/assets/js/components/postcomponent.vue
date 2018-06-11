@@ -10,6 +10,10 @@
                 </div>
             </form>
         </div>
+        <div v-if="noActivity">
+
+            <h4>No Activities Create a Post</h4>
+        </div>
         <div class="container">
             <div  v-for="singleFeed  in feed" class="panel-body">
                 <div class="col-lg-1">
@@ -26,8 +30,13 @@
 <script>
     export default {
         mounted(){
-            this.$http.get('post/get').then((respose)=>{
-               this.feed=respose.body.data;
+            this.$http.get('post/get').then((response)=>{
+                if(response.posts.length==0) {
+                    this.noActivity=true;
+                }
+                response.posts.forEach((post) => {
+                    this.feed.push(post);
+                });
             })
         },
         props: ['profile_user_id']
@@ -38,6 +47,7 @@
                 body: '',
                 posts: [],
                 feed: [],
+                noActivity: false
             }
         },
         methods:{
@@ -49,8 +59,7 @@
                 }
                 this.$http.post('post/save', postData).then(
                     (response) => {
-                console.log(response.body);
-                    this.post=response.body;
+                           
                     }
                 )
             },

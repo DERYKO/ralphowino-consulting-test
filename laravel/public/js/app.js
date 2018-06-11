@@ -48587,8 +48587,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.loading = true;
             this.$http.get('/acceptFriend/' + this.profile_user_id).then(function (response) {
                 if (response.body == 1) {
-                    _this3.status = 'friends';
-                    _this3.loading = false;
+                    _this3.status = 'friends', _this3.loading = false;
                 }
             });
         },

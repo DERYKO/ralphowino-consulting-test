@@ -10,7 +10,8 @@
         "get-stream/stream": "^2.7",
         "hootlex/laravel-friendships": "^1.0",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "get-stream/stream-laravel": "~2.2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
