@@ -11,6 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -26,17 +27,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+
+                            <a class="navbar-brand" href="{{ url('\home')}}">
+                                <b><i class="fa fa-home"> Home</i></b>
+                            </a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -46,16 +45,34 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                            <ul class="nav navbar-nav">
+
+                                @if(Auth::check())
+                                    <a class="navbar-brand" href="{{ url('\friends') }}">
+                                        <b><i class="fa fa-users"> Friends</i></b>
+                                    </a>
+                                @endif
+                                    @if(Auth::check())
+                                        <a class="navbar-brand" href="{{ url('\friends') }}">
+                                            <b><i class="fa fa-bell"> Notifications</i></b>
+                                        </a>
+                                    @endif
+                                @if(Auth::check())
+                                    <a class="navbar-brand" href="{{ url('\messaging') }}">
+                                        <b><i class="fa fa-comment"> <unread :user_id="{{Auth::user()->id}}"></unread>Inbox</i></b>
+                                    </a>
+                                @endif
+                            </ul>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu" role="menu">
+                                <ul class="dropdown-menu pull-right" role="menu">
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        <a class="fa fa-sign-out" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit()">
                                             Logout
                                         </a>
 
@@ -63,6 +80,7 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    <li><a class="fa fa-gear"> Settings</a></li>
                                 </ul>
                             </li>
                         @endif

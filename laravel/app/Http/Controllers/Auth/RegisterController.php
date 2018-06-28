@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use GetStream\Stream\Client;
+use Illuminate\Http\Request;
+use App\Post;
+use Illuminate\Support\Facades\Config;
+
+use App\Profile;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -48,9 +54,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'gender'=>'required|bool',
+            'DOB'=>'required|date'
         ]);
     }
 
@@ -62,10 +70,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        if($data['gender']){
+           $avatar='avatar/male.png';
+        }else{
+            $avatar='vavatar/female.png';
+        }
+        $user= User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'gender'=>$data['gender'],
+            'slug'=>str_slug($data['name']),
+            'avatar'=> $avatar,
+            'DOB'=>$data['DOB']
+
         ]);
+        Profile::create(['user_id'=>$user->id]);
+        $client = new Client('uzbecczm6uh8', 'a2p8a3safphgnef5waxybc9q9s2cnkqvq4ndp7kna7uzdhnygrtpttad6srq6wed');
+        $client->feed('user', $user->id);
+        return $user;
     }
 }
